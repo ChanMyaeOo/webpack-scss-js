@@ -2,6 +2,7 @@
 const path = require("path"); // update from 23.12.2018
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const FaviconsWebpackPlugin = require("favicons-webpack-plugin");
 module.exports = {
   entry: { main: "./src/index.js" },
   output: {
@@ -28,6 +29,14 @@ module.exports = {
           "css-loader",
           "sass-loader"
         ]
+      },
+      {
+        test: /\.(png|jpe?g|gif)$/i,
+        use: [
+          {
+            loader: "file-loader"
+          }
+        ]
       }
     ]
   },
@@ -40,6 +49,7 @@ module.exports = {
       hash: true,
       template: "./src/index.html",
       filename: "index.html"
-    })
+    }),
+    new FaviconsWebpackPlugin("./src/img/arrow.png")
   ]
 };
